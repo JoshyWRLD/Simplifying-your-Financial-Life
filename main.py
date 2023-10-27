@@ -8,13 +8,9 @@ from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
 
-
 class SimplifyingYourFinancialLifeApp(App):
     def build(self):
         self.icon = "Simplifying 2.png"
-        # Set the window size and background color
-        Window.size = (400, 700)
-        Window.clearcolor = (1, 1, 0, 1)  # Set background color to white
 
         # Create a screen manager
         self.sm = ScreenManager()
@@ -25,14 +21,12 @@ class SimplifyingYourFinancialLifeApp(App):
 
         return self.sm
 
-
 class MainScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         self.summary_hidden = True  # Initially hide the summary
 
-        # Create a BoxLayout with a vertical orientation
         layout = BoxLayout(orientation='vertical')
 
         # Create labels and entry fields for income
@@ -79,19 +73,19 @@ class MainScreen(Screen):
 
         self.add_widget(layout)
 
-        self.popup = None  # Initialize a popup
+        self.popup = None
 
     def create_label(self, text):
-        label = Label(text=text, color=(0.2, 0.2, 0.2, 1))  # Set label text color
+        label = Label(text=text, color=(0.2, 0.2, 0.2, 1))
         return label
 
     def create_entry(self):
-        entry = TextInput(multiline=False, background_color=(0.95, 0.95, 0.95, 1))  # Set entry background color
+        entry = TextInput(multiline=False, background_color=(0.95, 0.95, 0.95, 1))
         entry.bind(text=self.on_entry_text_change)
         return entry
 
     def create_button(self, text, on_release):
-        button = Button(text=text, background_color=(0.2, 0.5, 0.8, 1))  # Set button background color
+        button = Button(text=text, background_color=(0.2, 0.5, 0.8, 1))
         button.bind(on_release=on_release)
         return button
 
@@ -182,11 +176,9 @@ class MainScreen(Screen):
             entry.text = ""
 
     def on_entry_text_change(self, instance, value):
-        # Automatically update summary when text in an entry changes
         self.update_summary()
 
     def show_warning(self, message):
-        # Create and display a warning popup
         content = BoxLayout(orientation="vertical")
         content.add_widget(Label(text=message))
         close_button = Button(text="OK")
@@ -194,7 +186,6 @@ class MainScreen(Screen):
         self.popup = Popup(title="Warning", content=content, size_hint=(None, None), size=(300, 200), auto_dismiss=True)
         close_button.bind(on_release=self.popup.dismiss)
         self.popup.open()
-
 
 if __name__ == "__main__":
     SimplifyingYourFinancialLifeApp().run()
